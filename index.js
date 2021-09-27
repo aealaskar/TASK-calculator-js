@@ -7,54 +7,79 @@
  * If you click on button +, the text will be "+"
  * ,... and so on
  */
-let firstNumber = []
-let secondNumer = []
-const sum = Number.firstNumber + Number.secondNumer
-const sub = Number.firstNumber - Number.secondNumer
-const div = Number.firstNumber / Number.secondNumer
-const multi = Number.firstNumber * Number.secondNumer
-const nums = [1,2,3,4,5,6,7,8,9,0,"."]
+let consoleText = "";
+let num1;
+let num2;
+let operation;
+let result;
+
 function buttonClick(text) {
-  
- /*  nums.forEach(num => {
-    num !== text
-    console.log('working')
-  }); */
-/* 
-  if (text !== nums.forEach(num => num !== text)){
-    console.log('working')
-  } */
-
-  if (text === "x" || text === "-"|| text === "+"||text === "÷"){
-    
-    return;
-  }
-
-  if (text === "x" || text === "-"|| text === "+"||text === "÷" ) {
-    secondNumer 
-    printOnConsole(secondNumer.reduce((a, b) => a.toString() + b.toString()))
-    console.log(secondNumer)
-  }
-
-  console.log("Clicking", text);
+  // if (text === "=") {
+  //   printOnConsole(result);
+  // }
   if (text === "AC") {
-    firstNumber =[]
-    printOnConsole('0')
-    return;
+    clear();
+  } else if (isNumber(text)) {
+    consoleText += text;
+    printOnConsole(removeZero(consoleText));
+  } else if (isOperation(text)) {
+    if (num1 === undefined) {
+      num1 = consoleText;
+      consoleText = "0";
+      operation = text;
+    } else if (num2 === undefined || text === "=") {
+      num2 = consoleText;
+      if (operation === "+") {
+        result = +num1 + +num2;
+        printOnConsole(result);
+      }
+      // } else if (text === "=") {
+      //   printOnConsole(result);
+      // }
+      // switch (operation) {
+      //   case "+":
+      //     printOnConsole(+num1 + +num2);
+      //     result = +num1 + +num2;
+      //     break;
+      //   case "-":
+      //     printOnConsole(+num1 - +num2);
+      //     result = +num1 - +num2;
+      //     break;
+      //   case "÷":
+      //     printOnConsole(+num1 / +num2);
+      //     result = +num1 / +num2;
+      //     break;
+      //   case "x":
+      //     printOnConsole(+num1 * +num2);
+      //     result = +num1 * +num2;
+      //     break;
+    }
   }
-  if (firstNumber[0] === 0){
-    firstNumber =[]
-    return;
-  }
-  firstNumber.push(text)
-  printOnConsole(firstNumber.reduce((a, b) => a.toString() + b.toString()))
 }
 
+function isOperation(text) {
+  return text === "-" || text === "+" || text === "x" || text === "÷";
+}
+
+function removeZero(text) {
+  return +text;
+}
+
+function isNumber(text) {
+  return parseInt(text) >= 0 && parseInt(text) <= 9;
+}
+
+function clear() {
+  printOnConsole("0");
+  num1 = undefined;
+  num2 = undefined;
+  consoleText = "";
+}
 /** Supporting functions
  * 1. `printOnConsole(text)`, takes any text, and renders the console part of the web page
  * 2. `updateHistory(array)`, takes an array of strings and renders it on the web page
  */
 
 // Remove Me after testing
-printOnConsole("123");
+printOnConsole("0");
 updateHistory(["This is a sample historry", "1 + 5 = 6", "5 x 10 = 50"]);
